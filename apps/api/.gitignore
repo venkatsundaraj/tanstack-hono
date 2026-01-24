@@ -1,2 +1,6 @@
 # deps
 node_modules/
+
+# Wrangler/Cloudflare specific
+.wrangler
+.dev.vars
