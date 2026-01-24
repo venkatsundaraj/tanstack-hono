@@ -2,7 +2,7 @@
   "name": "tanstack+bun",
   "private": true,
   "scripts": {
-    "build": "turbo run build",
+    "build": "turbo run build --filter=!web --filter=!docs",
     "dev": "turbo run dev --filter=!web --filter=!docs",
     "lint": "turbo run lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
