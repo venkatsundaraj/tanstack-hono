@@ -1,9 +1,9 @@
 {
   "name": "api",
   "scripts": {
-    "live-dev": "wrangler dev src/index.ts --compatibility-flags=nodejs_compat",
+    "dev": "wrangler dev src/index.ts --compatibility-flags=nodejs_compat",
     "deploy": "wrangler deploy --minify --compatibility-flags=nodejs_compat",
-    "dev": "bun run --port 3001 --hot src/index.ts ",
+    "local-dev": "bun run --port 3001 --hot src/index.ts ",
     "build": "echo 'No build step required'",
     "start": "bun run src/index.ts"
   },
