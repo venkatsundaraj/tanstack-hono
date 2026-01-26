@@ -1,5 +1,6 @@
 interface ImportMetaEnv {
   readonly VITE_HONO_URL: string;
+  readonly VITE_APP_URL: string;
 }
 
 interface ImportMeta {
@@ -9,7 +10,7 @@ interface ImportMeta {
 declare global {
   namespace NodeJS {
     interface ProcessEnv {
-      readonly DATABASE_URL: string;
+      // readonly DATABASE_URL: string;
     }
   }
 }
