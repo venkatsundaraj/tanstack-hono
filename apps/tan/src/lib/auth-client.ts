@@ -1,7 +1,7 @@
 import { createAuthClient } from "better-auth/react";
 
 export const authClient = createAuthClient({
-  baseURL: process.env.VITE_HONO_URL!,
+  baseURL: "http://localhost:3001",
   fetchOptions: {
     credentials: "include",
   },

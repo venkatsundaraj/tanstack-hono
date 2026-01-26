@@ -3,7 +3,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { createServerFn } from "@tanstack/react-start";
 
 const getUser = createServerFn().handler(async () => {
-  const user = await fetch("http://localhost:3001/api/user/1");
+  const user = await fetch("http://localhost:3001/1");
   return await user.json();
 });
 
