@@ -16,8 +16,8 @@ export const createApp = function () {
   const app = createRouter();
 
   app.use((c, next) => {
-    c.env = parseEnv(c.env || {});
-    // c.env = parseEnv(Object.assign(c.env || {}, process.env));
+    // c.env = parseEnv(c.env || {});
+    c.env = parseEnv(Object.assign(c.env || {}, process.env));
     return next();
   });
   app.use(serveEmojiFavicon(""));

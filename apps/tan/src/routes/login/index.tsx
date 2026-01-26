@@ -3,7 +3,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { createServerFn } from "@tanstack/react-start";
 
 const getUser = createServerFn().handler(async () => {
-  const user = await fetch(`${process.env.VITE_HONO_URL}/1`);
+  const user = await fetch(`${process.env.VITE_HONO_URL}1`);
   return await user.json();
 });
 
