@@ -3,7 +3,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { createServerFn } from "@tanstack/react-start";
 
 const getUser = createServerFn().handler(async () => {
-  const user = await fetch("http://localhost:3001/1");
+  const user = await fetch(`${process.env.VITE_HONO_URL}/1`);
   return await user.json();
 });
 
@@ -18,7 +18,7 @@ function RouteComponent() {
   const clickHandler = async function () {
     await signIn.social({
       provider: "google",
-      callbackURL: "http://localhost:3000/dashboard",
+      callbackURL: `${process.env.REPO_URL}/dashboard`,
     });
   };
   return (
