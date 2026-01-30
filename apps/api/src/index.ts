@@ -28,7 +28,15 @@ const app = createApp();
 app.use("*", async (c, next) => {
   console.log(c.env.VITE_APP_URL);
   const corsMiddleware = cors({
-    origin: c.env.VITE_APP_URL as string,
+    origin: (origin) => {
+      const allowedOrigins = [
+        "http://localhost:3000",
+        "https://tanstack-hono-tan.vercel.app",
+        c.env.VITE_APP_URL,
+      ].filter(Boolean);
+
+      return allowedOrigins.includes(origin) ? origin : allowedOrigins[0];
+    },
     credentials: true,
   });
   return corsMiddleware(c, next);
