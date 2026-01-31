@@ -22,7 +22,7 @@ export const createAuth = (env: Environment) => {
         redirectURI: `${env.HONO_APP_URL}/api/auth/callback/google`,
       },
     },
-    trustedOrigins: [env.VITE_APP_URL],
+    trustedOrigins: [env.VITE_APP_URL, `${env.VITE_APP_URL}/*`],
     basePath: "/api/auth",
     secret: env.BETTER_AUTH_SECRET,
     database: drizzleAdapter(db, { provider: "pg" }),

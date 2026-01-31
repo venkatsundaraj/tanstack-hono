@@ -35,7 +35,7 @@ function RouteComponent() {
   const clickHandler = async function () {
     await signIn.social({
       provider: "google",
-      callbackURL: `${import.meta.env.VITE_APP_URL}dashboard`,
+      callbackURL: `/dashboard`,
     });
   };
   return (
