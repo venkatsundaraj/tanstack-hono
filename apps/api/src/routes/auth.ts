@@ -7,7 +7,15 @@ const auth = new Hono<AppBindings>();
 
 auth.use("/api/auth/*", (c, next) => {
   const corsMiddleware = cors({
-    origin: c.env.VITE_APP_URL,
+    origin: (origin) => {
+      const allowedOrigins = [
+        "https://tanstack-hono-tan.vercel.app",
+        "http://localhost:3000",
+        c.env.VITE_APP_URL,
+      ].filter(Boolean);
+
+      return allowedOrigins.includes(origin) ? origin : allowedOrigins[0];
+    },
     allowHeaders: ["Content-Type", "Authorization"],
     allowMethods: ["POST", "GET", "OPTIONS"],
     exposeHeaders: ["Content-Length"],

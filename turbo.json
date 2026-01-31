@@ -15,7 +15,8 @@
         "GOOGLE_CLIENT_ID",
         "GOOGLE_CLIENT_SECRET",
         "DATABASE_URL",
-        "NODE_ENV"
+        "NODE_ENV",
+        "BETTER_AUTH_BASE_URL"
       ]
     },
     "lint": {

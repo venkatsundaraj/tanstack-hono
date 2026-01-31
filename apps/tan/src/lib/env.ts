@@ -9,6 +9,7 @@ export const server = z.object({
   GOOGLE_CLIENT_SECRET: z.string().min(1),
   DATABASE_URL: z.url().min(1),
   APP_URL: z.url().min(1),
+  BETTER_AUTH_BASE_URL: z.url().min(1),
 });
 
 export const client = z.object({
