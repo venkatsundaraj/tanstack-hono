@@ -24,6 +24,12 @@ export default function Header() {
         <div className="px-2 font-bold">
           <Link to="/placeholder">Placeholder</Link>
         </div>
+        <div className="px-2 font-bold">
+          <Link to="/login">login</Link>
+        </div>
+        <div className="px-2 font-bold">
+          <Link to="/dashboard">dashboard</Link>
+        </div>
       </nav>
     </header>
   );

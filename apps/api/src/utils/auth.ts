@@ -6,38 +6,34 @@ import { drizzleAdapter } from "better-auth/adapters/drizzle";
 export const createAuth = (env: Environment) => {
   const db = createDb(env);
   return betterAuth({
-    // session: {
-    //   strategy: "jwt",
-    //   expiresIn: 60 * 60 * 24 * 7,
-    //   updateAge: 60 * 60 * 24,
-    //   cookieCache: {
-    //     enabled: true,
-    //     maxAge: 60 * 5,
-    //   },
-    // },
+    database: drizzleAdapter(db, { provider: "pg" }),
+    baseURL: env.HONO_APP_URL, // e.g. https://api.yoursite.com
+    secret: env.BETTER_AUTH_SECRET,
+
+    // Add this to handle proxy headers in production
+    trustHost: true,
+
     socialProviders: {
       google: {
         clientId: env.GOOGLE_CLIENT_ID,
         clientSecret: env.GOOGLE_CLIENT_SECRET,
-        redirectURI: `${env.HONO_APP_URL}/api/auth/callback/google`,
+        // Let Better Auth construct this automatically using baseURL
       },
     },
-    trustedOrigins: [env.VITE_APP_URL, `${env.VITE_APP_URL}/*`],
-    basePath: "/api/auth",
-    secret: env.BETTER_AUTH_SECRET,
-    database: drizzleAdapter(db, { provider: "pg" }),
-    advanced: {
-      defaultCookieAttributes: {
-        sameSite: "lax",
-        secure: false,
-        httpOnly: true,
-        path: "/",
-        domain: undefined,
-      },
-    },
+
+    trustedOrigins: [env.VITE_APP_URL, env.HONO_APP_URL],
+
+    // Strategy "cookie" is good for cross-domain
     account: {
       storeStateStrategy: "cookie",
-      storeAccountCookie: true,
+    },
+
+    advanced: {
+      defaultCookieAttributes: {
+        sameSite: "none",
+        secure: true,
+        // Removing domain: undefined to let the browser handle it
+      },
     },
   });
 };

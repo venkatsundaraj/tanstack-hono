@@ -8,11 +8,19 @@ import {
 } from "@tanstack/react-router";
 import { createServerFn } from "@tanstack/react-start";
 
+export const currentUser = createServerFn().handler(async function () {
+  const data = await getCurrentUser();
+  if (data.user?.id) throw redirect({ to: "/dashboard" });
+  return;
+});
+
 export const getUser = createServerFn().handler(
   async (): Promise<{ name: string; id: number }[]> => {
     await new Promise((resolve) => setTimeout(resolve, 2000));
 
-    // const user = await fetch(`${process.env.VITE_HONO_URL}1`);
+    const userserver = await fetch(`${process.env.VITE_HONO_URL}/1`);
+    const data = await userserver.json();
+    console.log(data);
     const user = [{ name: "venkat", id: 45 }];
     return await user;
   },
@@ -20,8 +28,7 @@ export const getUser = createServerFn().handler(
 
 export const Route = createFileRoute("/login/")({
   beforeLoad: async ({ context }) => {
-    const data = await getCurrentUser();
-    if (data.user?.id) throw redirect({ to: "/dashboard" });
+    await currentUser();
   },
   component: RouteComponent,
   loader: async () => await getUser(),
@@ -35,7 +42,7 @@ function RouteComponent() {
   const clickHandler = async function () {
     await signIn.social({
       provider: "google",
-      callbackURL: `/dashboard`,
+      callbackURL: `${import.meta.env.VITE_APP_URL}dashboard`,
     });
   };
   return (
