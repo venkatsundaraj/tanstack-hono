@@ -4,6 +4,7 @@ import { AppBindings } from "@/lib/types";
 
 const users = new Hono<AppBindings>();
 
+users.get("/", (c) => c.json("hello world"));
 users.get("/:id", getUser);
 
 export default users;

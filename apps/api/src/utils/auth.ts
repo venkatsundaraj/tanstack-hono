@@ -27,12 +27,13 @@ export const createAuth = (env: Environment) => {
     account: {
       storeStateStrategy: "cookie",
     },
-
+    useSecureCookies: true,
     advanced: {
       defaultCookieAttributes: {
         sameSite: "none",
         secure: true,
-        // Removing domain: undefined to let the browser handle it
+        httpOnly: true,
+        domain: undefined,
       },
     },
   });
