@@ -22,7 +22,7 @@ export const getUser = createServerFn().handler(
     const hello = await fetch(`${process.env.VITE_HONO_URL}/api/auth/health`);
     console.log(await hello.json());
     const data = await userserver.json();
-    // console.log(data);
+    console.log(data, "raw");
     const user = [{ name: "venkat", id: 45 }];
     return await user;
   },
