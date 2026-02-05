@@ -57,9 +57,9 @@ auth.get("/api/auth/health", (c) => {
 
 auth.all("/api/auth/*", async (c) => {
   const authHandler = createAuth(c.env);
-  const res = await authHandler.handler(c.req.raw);
+  return await authHandler.handler(c.req.raw);
 
   // IMPORTANT: return the Response object
-  return res;
+  // return new Response(res.body, res);
 });
 export default auth;

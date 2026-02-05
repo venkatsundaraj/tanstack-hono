@@ -25,7 +25,7 @@ export const createAuth = (env: Environment) => {
 
     // Strategy "cookie" is good for cross-domain
     account: {
-      storeStateStrategy: "cookie",
+      storeStateStrategy: "database",
     },
     useSecureCookies: true,
     advanced: {
