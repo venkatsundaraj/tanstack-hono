@@ -18,7 +18,7 @@ export const getUser = createServerFn().handler(
   async (): Promise<{ name: string; id: number }[]> => {
     await new Promise((resolve) => setTimeout(resolve, 2000));
 
-    const userserver = await fetch(`${process.env.VITE_HONO_URL}1`);
+    const userserver = await fetch(`${process.env.VITE_HONO_URL}/1`);
     const hello = await fetch(`${process.env.VITE_HONO_URL}/api/auth/health`);
     console.log(await hello.json());
     const data = await userserver.json();
@@ -44,7 +44,7 @@ function RouteComponent() {
   const clickHandler = async function () {
     await signIn.social({
       provider: "google",
-      callbackURL: `${import.meta.env.VITE_APP_URL}dashboard`,
+      callbackURL: `${import.meta.env.VITE_APP_URL}/dashboard`,
     });
   };
   return (

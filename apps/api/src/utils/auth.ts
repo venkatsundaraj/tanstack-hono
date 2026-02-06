@@ -17,6 +17,7 @@ export const createAuth = (env: Environment) => {
       google: {
         clientId: env.GOOGLE_CLIENT_ID,
         clientSecret: env.GOOGLE_CLIENT_SECRET,
+        redirectURI: `${env.HONO_APP_URL}/api/auth/callback/google`,
         // Let Better Auth construct this automatically using baseURL
       },
     },
