@@ -30,7 +30,8 @@ const EnvSchema = z.object({
     "silent",
   ]),
   VITE_APP_URL: z.url().min(1),
-  HONO_APP_URL: z.url().min(1),
+  BETTER_AUTH_BASE_URL: z.url().min(1),
+  VITE_HONO_URL: z.url().min(1),
 });
 
 export type Environment = z.infer<typeof EnvSchema>;

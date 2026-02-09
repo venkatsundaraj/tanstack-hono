@@ -22,9 +22,13 @@ export const createApp = function () {
     c.env = parseEnv(Object.assign(c.env || {}, process.env));
     return next();
   });
+
+  app.use((c, next) => {
+    return next();
+  });
   // app.use("/api/auth/*", authCors);
   app.use(serveEmojiFavicon(""));
-  app.use(pinoLogger());
+  // app.use(pinoLogger());
   app.notFound(notFound);
   app.onError(onError);
   return app;

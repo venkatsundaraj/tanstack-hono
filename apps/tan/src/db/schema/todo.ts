@@ -7,7 +7,7 @@ import {
   timestamp,
 } from "drizzle-orm/pg-core";
 
-export const createTable = pgTableCreator((name) => `tan_${name}`);
+export const createTable = pgTableCreator((name) => `${name}`);
 export const todo = createTable("todo", {
   id: text("id").primaryKey(),
   todo: text("todo").notNull(),

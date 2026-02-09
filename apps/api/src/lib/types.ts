@@ -1,13 +1,14 @@
 import { Environment } from "@/env";
 import { PinoLogger } from "hono-pino";
 import { OpenAPIHono, RouteConfig, RouteHandler } from "@hono/zod-openapi";
+import { Session, User } from "better-auth";
 
 export interface AppBindings {
   Bindings: Environment;
   Variables: {
     logger: PinoLogger;
-    user: any;
-    session: any;
+    user: User;
+    session: Session;
   };
 }
 
