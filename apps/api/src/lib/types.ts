@@ -6,6 +6,8 @@ export interface AppBindings {
   Bindings: Environment;
   Variables: {
     logger: PinoLogger;
+    user: any;
+    session: any;
   };
 }
 

@@ -9,7 +9,13 @@ export function createDb(env: Environment) {
     conn: postgres.Sql;
   };
 
-  const conn = globalConn.conn ?? postgres(env.DATABASE_URL);
+  const conn =
+    globalConn.conn ??
+    postgres(env.DATABASE_URL, {
+      max: 1,
+      idle_timeout: 20,
+      connect_timeout: 10,
+    });
 
   if (env.NODE_ENV !== "production") globalConn.conn = conn;
 

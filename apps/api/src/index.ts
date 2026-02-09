@@ -1,6 +1,7 @@
 import { Hono } from "hono";
 import users from "./routes/user";
 import { logger } from "hono/logger";
+// import index from "@/routes/index.route";
 import auth from "./routes/auth";
 import { cors } from "hono/cors";
 import { createApp } from "./lib/create-app";
@@ -26,7 +27,7 @@ import { createApp } from "./lib/create-app";
 const app = createApp();
 
 app.use("*", async (c, next) => {
-  console.log(c.env.VITE_APP_URL);
+  // console.log(c.env.VITE_APP_URL);
   const corsMiddleware = cors({
     origin: (origin) => {
       const allowedOrigins = [

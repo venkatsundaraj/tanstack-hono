@@ -2,8 +2,9 @@ import { Hono } from "hono";
 import { cors } from "hono/cors";
 import { createAuth } from "../utils/auth";
 import type { AppBindings } from "@/lib/types";
+import { createApp } from "@/lib/create-app";
 
-const auth = new Hono<AppBindings>();
+const auth = createApp();
 
 auth.use("/api/auth/*", (c, next) => {
   const corsMiddleware = cors({
@@ -56,9 +57,21 @@ auth.get("/api/auth/health", (c) => {
 });
 
 auth.all("/api/auth/*", async (c) => {
+  console.log("Auth request:", {
+    method: c.req.method,
+    url: c.req.url,
+    path: new URL(c.req.url).pathname,
+    cookies: c.req.header("cookie"),
+  });
   const authHandler = createAuth(c.env);
-  return await authHandler.handler(c.req.raw);
+  const response = await authHandler.handler(c.req.raw);
+  console.log("Auth response:", {
+    status: response.status,
+    setCookie: response.headers.get("set-cookie"),
+    location: response.headers.get("location"),
+  });
 
+  return response;
   // IMPORTANT: return the Response object
   // return new Response(res.body, res);
 });
