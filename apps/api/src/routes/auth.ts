@@ -6,29 +6,6 @@ import { createApp } from "@/lib/create-app";
 
 const auth = createApp();
 
-auth.use("/api/auth/*", (c, next) => {
-  const corsMiddleware = cors({
-    origin: (origin) => {
-      const allowedOrigins = [
-        "https://tanstack-hono-tan.vercel.app",
-        "http://localhost:3000",
-      ];
-      return allowedOrigins.includes(origin) ? origin : allowedOrigins[0];
-    },
-    credentials: true,
-    allowMethods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-    allowHeaders: [
-      "Content-Type",
-      "Authorization",
-      "Cookie",
-      "X-Requested-With",
-    ],
-    exposeHeaders: ["Set-Cookie", "Content-Length"],
-    maxAge: 86400,
-  });
-  return corsMiddleware(c, next);
-});
-
 auth.get("/api/auth/debug-cookies", (c) => {
   return c.json({
     cookies: c.req.header("cookie"),
@@ -56,7 +33,30 @@ auth.get("/api/auth/health", (c) => {
   });
 });
 
-auth.all("/api/auth/*", async (c) => {
+auth.use("/api/auth/*", (c, next) => {
+  const corsMiddleware = cors({
+    origin: (origin) => {
+      const allowedOrigins = [
+        "https://tanstack-hono-tan.vercel.app",
+        "http://localhost:3000",
+      ];
+      return allowedOrigins.includes(origin) ? origin : allowedOrigins[0];
+    },
+    credentials: true,
+    allowMethods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowHeaders: [
+      "Content-Type",
+      "Authorization",
+      "Cookie",
+      "X-Requested-With",
+    ],
+    exposeHeaders: ["Set-Cookie", "Content-Length"],
+    maxAge: 86400,
+  });
+  return corsMiddleware(c, next);
+});
+
+auth.on(["GET", "POST"], "/api/auth/*", async (c) => {
   console.log("Auth request:", {
     method: c.req.method,
     url: c.req.url,

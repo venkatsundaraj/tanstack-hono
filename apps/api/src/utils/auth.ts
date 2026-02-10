@@ -3,12 +3,13 @@ import { createDb } from "@/db";
 import type { Environment } from "@/env";
 import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
+import * as schema from "@/db/schema/todos";
 
-export const createAuth = (env: Environment) => {
+export const createAuth = (env: Environment): ReturnType<typeof betterAuth> => {
   const db = createDb(env);
 
   return betterAuth({
-    database: drizzleAdapter(db, { provider: "pg" }),
+    database: drizzleAdapter(db, { provider: "pg", schema }),
     baseURL: env.BETTER_AUTH_BASE_URL,
     secret: env.BETTER_AUTH_SECRET,
     trustHost: true,
