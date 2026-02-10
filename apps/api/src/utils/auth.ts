@@ -10,7 +10,7 @@ export const createAuth = (env: Environment): ReturnType<typeof betterAuth> => {
 
   return betterAuth({
     database: drizzleAdapter(db, { provider: "pg", schema }),
-    baseURL: env.BETTER_AUTH_BASE_URL,
+    baseURL: env.BETTER_AUTH_URL,
     secret: env.BETTER_AUTH_SECRET,
     trustHost: true,
     basePath: "/api/auth",
@@ -19,7 +19,7 @@ export const createAuth = (env: Environment): ReturnType<typeof betterAuth> => {
       google: {
         clientId: env.GOOGLE_CLIENT_ID,
         clientSecret: env.GOOGLE_CLIENT_SECRET,
-        redirectURI: `${env.BETTER_AUTH_BASE_URL}/api/auth/callback/google`,
+        redirectURI: `${env.BETTER_AUTH_URL}/api/auth/callback/google`,
       },
     },
 

@@ -22,13 +22,13 @@ auth.get("/api/auth/health", (c) => {
     config: {
       hasGoogleClientId: !!c.env.GOOGLE_CLIENT_ID,
       hasGoogleClientSecret: !!c.env.GOOGLE_CLIENT_SECRET,
-      redirectURI: `${c.env.BETTER_AUTH_BASE_URL}/api/auth/callback/google`,
+      redirectURI: `${c.env.BETTER_AUTH_URL}/api/auth/callback/google`,
       trustedOrigins: [c.env.VITE_APP_URL],
     },
     endpoints: {
-      signIn: `${c.env.BETTER_AUTH_BASE_URL}/api/auth/sign-in/social?provider=google`,
-      callback: `${c.env.BETTER_AUTH_BASE_URL}/api/auth/callback/google`,
-      session: `${c.env.BETTER_AUTH_BASE_URL}/api/auth/session`,
+      signIn: `${c.env.BETTER_AUTH_URL}/api/auth/sign-in/social?provider=google`,
+      callback: `${c.env.BETTER_AUTH_URL}/api/auth/callback/google`,
+      session: `${c.env.BETTER_AUTH_URL}/api/auth/session`,
     },
   });
 });
