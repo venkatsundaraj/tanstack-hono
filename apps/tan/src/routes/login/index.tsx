@@ -22,9 +22,12 @@ export const getUser = createServerFn().handler(
       `${process.env.BETTER_AUTH_BASE_URL}/api/auth/health`,
     );
     console.log(await hello.json());
-    const data = await userserver.json();
+    const data: {
+      name: string;
+      id: number;
+    }[] = await userserver.json();
     console.log(data, "raw");
-    const user = [{ name: "venkat", id: 45 }];
+    const user = data;
     return await user;
   },
 );
