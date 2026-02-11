@@ -7,7 +7,7 @@ const globalConn = globalThis as unknown as {
   conn: postgres.Sql;
 };
 
-const conn = globalConn.conn ?? postgres(serverEnv.DATABASE_URL);
+const conn = globalConn.conn ?? postgres(process.env.DATABASE_URL!);
 
 if (serverEnv.NODE_ENV !== "production") globalConn.conn = conn;
 

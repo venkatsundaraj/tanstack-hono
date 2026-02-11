@@ -1,5 +1,6 @@
 import { betterAuth } from "better-auth";
-import { clientEnv, serverEnv } from "./env";
+import { serverEnv } from "./env";
+import { clientEnv } from "./public-env";
 import { createServerFn, createServerOnlyFn } from "@tanstack/react-start";
 
 export const auth = createServerOnlyFn(() => {

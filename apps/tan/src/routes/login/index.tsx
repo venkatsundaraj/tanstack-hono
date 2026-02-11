@@ -1,5 +1,6 @@
 import { signIn } from "@/lib/auth-client";
-import { clientEnv, serverEnv } from "@/lib/env";
+import { serverEnv } from "@/lib/env";
+import { clientEnv } from "@/lib/public-env";
 import { getCurrentUser } from "@/lib/session-utils";
 import {
   createFileRoute,
@@ -17,9 +18,9 @@ export const currentUser = createServerFn().handler(async function () {
 export const getUser = createServerFn().handler(
   async (): Promise<{ name: string; id: string }[]> => {
     await new Promise((resolve) => setTimeout(resolve, 2000));
-    const userserver = await fetch(`${serverEnv.BETTER_AUTH_BASE_URL}/1`);
+    const userserver = await fetch(`${process.env.BETTER_AUTH_BASE_URL}/1`);
     const hello = await fetch(
-      `${serverEnv.BETTER_AUTH_BASE_URL}/api/auth/health`,
+      `${process.env.BETTER_AUTH_BASE_URL}/api/auth/health`,
     );
     console.log(await hello.json());
     const data: {
@@ -44,7 +45,6 @@ function RouteComponent() {
   const rootData = useLoaderData({ from: "__root__" });
   // console.log(rootData.isValid);
   const user = Route.useLoaderData();
-  console.log(user, clientEnv, serverEnv);
 
   const clickHandler = async function () {
     await signIn.social({

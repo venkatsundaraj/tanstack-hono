@@ -8,7 +8,7 @@ export default defineConfig({
   dialect: "postgresql",
   out: "./drizzle-prod",
   dbCredentials: {
-    url: serverEnv.DATABASE_URL,
+    url: process.env.DATABASE_URL!,
   },
   tablesFilter: ["tan_*"],
 }) satisfies Config;
