@@ -19,7 +19,7 @@ export const createAuth = (env: Environment): ReturnType<typeof betterAuth> => {
       google: {
         clientId: env.GOOGLE_CLIENT_ID,
         clientSecret: env.GOOGLE_CLIENT_SECRET,
-        redirectURI: `${env.BETTER_AUTH_URL}/api/auth/callback/google`,
+        // redirectURI: `${env.BETTER_AUTH_URL}/api/auth/callback/google`,
       },
     },
 
@@ -46,6 +46,8 @@ export const createAuth = (env: Environment): ReturnType<typeof betterAuth> => {
           attributes: {
             sameSite: "none",
             secure: true,
+            httpOnly: true,
+            domain: undefined,
           },
         },
       },

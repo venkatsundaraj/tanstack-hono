@@ -4,5 +4,5 @@ const users = [
 ];
 export const findByUserId = function (id: string) {
   const filterItem = users.filter((i) => i.id === id);
-  return filterItem;
+  return { item: filterItem };
 };
