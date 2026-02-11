@@ -17,9 +17,9 @@ export const currentUser = createServerFn().handler(async function () {
 export const getUser = createServerFn().handler(
   async (): Promise<{ name: string; id: string }[]> => {
     await new Promise((resolve) => setTimeout(resolve, 2000));
-    const userserver = await fetch(`${serverEnv.BETTER_AUTH_BASE_URL}/1`);
+    const userserver = await fetch(`${process.env.BETTER_AUTH_BASE_URL}/1`);
     const hello = await fetch(
-      `${serverEnv.BETTER_AUTH_BASE_URL}/api/auth/health`,
+      `${process.env.BETTER_AUTH_BASE_URL}/api/auth/health`,
     );
     console.log(await hello.json());
     const data: {
@@ -28,7 +28,7 @@ export const getUser = createServerFn().handler(
     }[] = await userserver.json();
     console.log(data, "raw");
 
-    return data;
+    return [{ id: "1", name: "venkatsundaraj" }];
   },
 );
 
