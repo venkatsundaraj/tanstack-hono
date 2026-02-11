@@ -29,7 +29,7 @@ export const getUser = createServerFn().handler(
     }[] = await userserver.json();
     console.log(data, "raw");
 
-    return [{ id: "1", name: "venkatsundaraj" }];
+    return data;
   },
 );
 
@@ -45,7 +45,7 @@ function RouteComponent() {
   const rootData = useLoaderData({ from: "__root__" });
   // console.log(rootData.isValid);
   const user = Route.useLoaderData();
-
+  console.log(user);
   const clickHandler = async function () {
     await signIn.social({
       provider: "google",
@@ -55,9 +55,9 @@ function RouteComponent() {
   return (
     <div>
       <button onClick={clickHandler}>login</button>
-      {user.map((item, i) => (
+      {/* {user.map((item, i) => (
         <h4 key={i}>{item.name}</h4>
-      ))}
+      ))} */}
 
       {/* <Suspense fallback={<p>Loading...</p>}>
         <SuspenseComponent />

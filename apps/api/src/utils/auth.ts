@@ -41,13 +41,21 @@ export const createAuth = (env: Environment): ReturnType<typeof betterAuth> => {
 
     advanced: {
       // useSecureCookies: true,
-      defaultCookieAttributes: {
-        sameSite: "none",
-        secure: true,
-        httpOnly: true,
-        // path: "/",
-        domain: undefined,
+      cookies: {
+        state: {
+          attributes: {
+            sameSite: "none",
+            secure: true,
+          },
+        },
       },
+      // defaultCookieAttributes: {
+      //   sameSite: "none",
+      //   secure: true,
+      //   httpOnly: true,
+      //   // path: "/",
+      //   domain: undefined,
+      // },
     },
   });
 };
