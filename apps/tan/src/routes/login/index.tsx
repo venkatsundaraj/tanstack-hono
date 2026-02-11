@@ -44,6 +44,7 @@ function RouteComponent() {
   const rootData = useLoaderData({ from: "__root__" });
   // console.log(rootData.isValid);
   const user = Route.useLoaderData();
+  console.log(user, clientEnv, serverEnv);
 
   const clickHandler = async function () {
     await signIn.social({
