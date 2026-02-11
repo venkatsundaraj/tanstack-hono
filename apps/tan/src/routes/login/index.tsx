@@ -1,4 +1,5 @@
 import { signIn } from "@/lib/auth-client";
+import { clientEnv, serverEnv } from "@/lib/env";
 import { getCurrentUser } from "@/lib/session-utils";
 import {
   createFileRoute,
@@ -14,21 +15,20 @@ export const currentUser = createServerFn().handler(async function () {
 });
 
 export const getUser = createServerFn().handler(
-  async (): Promise<{ name: string; id: number }[]> => {
+  async (): Promise<{ name: string; id: string }[]> => {
     await new Promise((resolve) => setTimeout(resolve, 2000));
-
-    const userserver = await fetch(`${process.env.BETTER_AUTH_BASE_URL}/1`);
+    const userserver = await fetch(`${serverEnv.BETTER_AUTH_BASE_URL}/1`);
     const hello = await fetch(
-      `${process.env.BETTER_AUTH_BASE_URL}/api/auth/health`,
+      `${serverEnv.BETTER_AUTH_BASE_URL}/api/auth/health`,
     );
     console.log(await hello.json());
     const data: {
       name: string;
-      id: number;
+      id: string;
     }[] = await userserver.json();
     console.log(data, "raw");
-    const user = data;
-    return await user;
+
+    return data;
   },
 );
 
