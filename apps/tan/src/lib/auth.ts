@@ -23,9 +23,5 @@ export const auth = createServerOnlyFn(() => {
     trustedOrigins: [import.meta.env.VITE_APP_URL!],
     basePath: "/api/auth",
     secret: serverEnv.BETTER_AUTH_SECRET,
-    account: {
-      storeStateStrategy: "cookie",
-      storeAccountCookie: true,
-    },
   });
 });

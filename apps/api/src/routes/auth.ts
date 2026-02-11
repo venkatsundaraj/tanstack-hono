@@ -57,7 +57,7 @@ auth.get("/api/auth/health", (c) => {
   });
 });
 
-auth.on(["GET", "POST"], "/api/auth/*", async (c) => {
+auth.all("/api/auth/*", async (c) => {
   console.log("Auth request:", {
     method: c.req.method,
     url: c.req.url,
